@@ -1,0 +1,49 @@
+{
+  "title": "Cultura general",
+  "questions": [
+    {
+      "questionText": "La Tierra es plana.",
+      "questionType": 0,
+      "duration": 15,
+      "scoreMultiplier": 0,
+      "answers": [ "Verdadero", "Falso" ],
+      "correctAnswers": [ 1 ],
+      "minimumValue": 0,
+      "maximumValue": 0,
+      "correctValue": 0
+    },
+    {
+      "questionText": "¿Cuáles son planetas?",
+      "questionType": 1,
+      "duration": 20,
+      "scoreMultiplier": 1,
+      "answers": [ "Marte", "Luna", "Venus", "Sol" ],
+      "correctAnswers": [ 0, 2 ],
+      "minimumValue": 0,
+      "maximumValue": 0,
+      "correctValue": 0
+    },
+    {
+      "questionText": "¿Cuál es la capital de Francia?",
+      "questionType": 2,
+      "duration": 15,
+      "scoreMultiplier": 0,
+      "answers": [ "Madrid", "París", "Roma", "Lisboa" ],
+      "correctAnswers": [ 1 ],
+      "minimumValue": 0,
+      "maximumValue": 0,
+      "correctValue": 0
+    },
+    {
+      "questionText": "¿Cuánto es 3x7?",
+      "questionType": 3,
+      "duration": 30,
+      "scoreMultiplier": 1,
+      "answers": [],
+      "correctAnswers": [],
+      "minimumValue": 0,
+      "maximumValue": 100,
+      "correctValue": 21
+    }
+  ]
+}
