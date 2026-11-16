@@ -1,0 +1,49 @@
+{
+  "title": "Videojuegos clásicos",
+  "questions": [
+    {
+      "questionText": "¿En qué año se lanzó el primer Super Mario Bros. para NES?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "1983", "1985", "1987", "1990" ],
+      "correctAnswers": [ 1 ],
+      "minimumValue": 0,
+      "maximumValue": 0,
+      "correctValue": 0
+    },
+    {
+      "questionText": "¿Pac-Man fue creado originalmente por Nintendo?",
+      "questionType": 0,
+      "duration": 15,
+      "scoreMultiplier": 0,
+      "answers": [ "Verdadero", "Falso" ],
+      "correctAnswers": [ 1 ],
+      "minimumValue": 0,
+      "maximumValue": 0,
+      "correctValue": 0
+    },
+    {
+      "questionText": "¿Cuáles de estos personajes pertenecen a SEGA?",
+      "questionType": 1,
+      "duration": 25,
+      "scoreMultiplier": 1,
+      "answers": [ "Sonic", "Alex Kidd", "Mario", "Kirby" ],
+      "correctAnswers": [ 0, 1 ],
+      "minimumValue": 0,
+      "maximumValue": 0,
+      "correctValue": 0
+    },
+    {
+      "questionText": "¿En qué año se lanzó el primer Pokémon en Japón?",
+      "questionType": 3,
+      "duration": 30,
+      "scoreMultiplier": 1,
+      "answers": [],
+      "correctAnswers": [],
+      "minimumValue": 1980,
+      "maximumValue": 2010,
+      "correctValue": 1996
+    }
+  ]
+}
