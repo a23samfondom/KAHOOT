@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 2363300841501735608}
   - component: {fileID: 5350268969551462103}
   m_Layer: 5
-  m_Name: QuestNumber
+  m_Name: QuestionNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,8 +385,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: JUGAR
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 77fb6db0dde6f0442a1fd8a73f5e607c, type: 2}
-  m_sharedMaterial: {fileID: -1394793298756773733, guid: 77fb6db0dde6f0442a1fd8a73f5e607c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -586,6 +586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6913884429122529707}
   - component: {fileID: 2860331009990151886}
+  - component: {fileID: 6521787141122587471}
   m_Layer: 5
   m_Name: QuizItemPrefab
   m_TagString: Untagged
@@ -622,6 +623,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5910486944095609372}
   m_CullTransparentMesh: 1
+--- !u!114 &6521787141122587471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5910486944095609372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb7bb6fa21bb1040ad94ea79d0e1b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuizItemUI
+  titleText: {fileID: 1515975939730746127}
+  numberText: {fileID: 4663709465002935285}
+  playButton: {fileID: 2864306704305208549}
 --- !u!1 &6458673434930435435
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +725,7 @@ GameObject:
   - component: {fileID: 2829530171052882283}
   - component: {fileID: 1515975939730746127}
   m_Layer: 5
-  m_Name: Title
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
