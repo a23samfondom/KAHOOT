@@ -9,8 +9,12 @@ public class QuizSelectorUI : MonoBehaviour
     [SerializeField] private Transform content;
     [SerializeField] private GameObject quizItemPrefab;
 
+    [Header("Panel de nickname")] [SerializeField] private CanvasGroup nicknamePanel;
+
+
     private void Start()
     {
+        OcultarNickname();
         CrearListaKahoots();
     }
 
@@ -60,10 +64,33 @@ public class QuizSelectorUI : MonoBehaviour
             // Rellenar el elemento y configurar su botón.
             itemUI.Configurar(
                 quiz,
-                () => quizSelector.SeleccionarQuiz(indiceQuiz)
+                () => SeleccionarQuiz(indiceQuiz)
             );
         }
 
         Debug.Log("Lista de Kahoots creada correctamente.");
+    }
+
+    private void SeleccionarQuiz(int indice)
+    {
+        // Seleccionar el Kahoot.
+        quizSelector.SeleccionarQuiz(indice);
+
+        // Mostrar el panel de nickname.
+        MostrarNickname();
+    }
+
+    private void OcultarNickname()
+    {
+        nicknamePanel.alpha = 0;
+        nicknamePanel.interactable = false;
+        nicknamePanel.blocksRaycasts = false;
+    }
+
+    private void MostrarNickname()
+    {
+        nicknamePanel.alpha = 1;
+        nicknamePanel.interactable = true;
+        nicknamePanel.blocksRaycasts = true;
     }
 }
