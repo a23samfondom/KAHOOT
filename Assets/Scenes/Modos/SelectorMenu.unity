@@ -1625,7 +1625,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 939441455}
         m_TargetAssemblyTypeName: NicknamePanelUI, Assembly-CSharp
-        m_MethodName: VolverAlMenu
+        m_MethodName: VolverAlMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1793,6 +1793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NicknamePanelUI
   nicknameInput: {fileID: 328714862}
+  quizSelector: {fileID: 171500863}
 --- !u!4 &939441456
 Transform:
   m_ObjectHideFlags: 0

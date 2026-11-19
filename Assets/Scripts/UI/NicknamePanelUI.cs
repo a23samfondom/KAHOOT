@@ -1,24 +1,36 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class NicknamePanelUI : MonoBehaviour
 {
-    [Header("Referencias")] [SerializeField] private TMP_InputField nicknameInput;
+    [Header("Referencias")]
+    [SerializeField] private TMP_InputField nicknameInput;
+    [SerializeField] private QuizSelector quizSelector;
 
     public void IniciarPartida()
     {
-        // Obtener el nombre introducido.
         string nombre = nicknameInput.text.Trim();
 
-        // Comprobar que el nombre no esté vacío.
         if (string.IsNullOrEmpty(nombre))
         {
             Debug.LogWarning("Debes introducir un nombre.");
             return;
         }
 
-        // Mostrar el nombre en consola.
-        Debug.Log("Jugador: " + nombre);
+        if (quizSelector == null || quizSelector.SelectedQuiz == null)
+        {
+            Debug.LogError("No hay ningún Kahoot seleccionado.");
+            return;
+        }
+
+        GameSession.PlayerName = nombre;
+        GameSession.SelectedQuiz = quizSelector.SelectedQuiz;
+
+        Debug.Log("Jugador: " + GameSession.PlayerName);
+        Debug.Log("Kahoot: " + GameSession.SelectedQuiz.title);
+
+        SceneManager.LoadScene("GameMode");
     }
 
     public void VolverAlSelector()
@@ -26,8 +38,8 @@ public class NicknamePanelUI : MonoBehaviour
         SceneManager.LoadScene("SelectorMenu");
     }
 
-    public void VolverAlMenu()
+    public void VolverAlMainMenu()
     {
-        SceneManager.LoadScene("ModosMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 }
