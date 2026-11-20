@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
         if (currentQuestionIndex >= currentQuiz.questions.Count)
         {
             Debug.Log("¡Kahoot terminado!");
+
+            FindFirstObjectByType<LeaderboardUI>().MostrarClasificacionFinal();
             return;
         }
 

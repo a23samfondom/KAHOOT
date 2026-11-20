@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 public class QuestionUI : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private AnswerSystem answerSystem;
 
     [Header("Información del Kahoot")]
     //[SerializeField] private TMP_Text quizTitleText;
@@ -24,6 +26,10 @@ public class QuestionUI : MonoBehaviour
     [Header("Temporizador")]
     [SerializeField] private QuestionTimer questionTimer;
 
+    [Header("Textos de las respuestas")]
+    [SerializeField] private TMP_Text[] normalAnswerTexts;
+    [SerializeField] private Text[] multipleAnswerTexts;
+
     private void Start()
     {
         MostrarPregunta();
@@ -42,6 +48,7 @@ public class QuestionUI : MonoBehaviour
 
         MostrarPanelRespuesta(pregunta.questionType);
         MostrarInformacionPregunta(pregunta);
+        answerSystem.ReiniciarRespuesta();
         questionTimer.StartTimer(pregunta.duration);
 
         //quizTitleText.text = quiz.title;

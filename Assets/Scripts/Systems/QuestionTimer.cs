@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+
 public class QuestionTimer : MonoBehaviour
 {
     [Header("Referencias")]
@@ -10,6 +11,11 @@ public class QuestionTimer : MonoBehaviour
     private float timeRemaining;
     private float totalDuration;
     private bool isRunning;
+
+    public float TimeRemaining
+    {
+        get { return timeRemaining; }
+    }
 
     public event Action OnTimerFinished;
 
@@ -47,4 +53,8 @@ public class QuestionTimer : MonoBehaviour
     {
         isRunning = false;
     }
+
+
 }
+
+

@@ -16,7 +16,7 @@
       "questionText": "¿Pac-Man fue creado originalmente por Nintendo?",
       "questionType": 0,
       "duration": 15,
-      "scoreMultiplier": 0,
+      "scoreMultiplier": 1,
       "answers": [ "Verdadero", "Falso" ],
       "correctAnswers": [ 1 ],
       "minimumValue": 0,
