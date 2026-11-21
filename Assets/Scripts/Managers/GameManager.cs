@@ -4,6 +4,13 @@ public class GameManager : MonoBehaviour
     private QuizData currentQuiz;
     private int currentQuestionIndex = 0;
 
+    private float startTime;
+
+    public float TotalTime
+    {
+        get { return Time.time - startTime; }
+    }
+
     public QuestionData CurrentQuestion
     {
         get { return currentQuiz.questions[currentQuestionIndex]; }
@@ -23,6 +30,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError("El Kahoot no tiene preguntas disponibles.");
             return;
         }
+
+        startTime = Time.time;
 
         Debug.Log("Partida iniciada: " + currentQuiz.title);
     }

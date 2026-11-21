@@ -46,6 +46,7 @@ public class QuestionUI : MonoBehaviour
         QuizData quiz = GameSession.SelectedQuiz;
         QuestionData pregunta = gameManager.CurrentQuestion;
 
+        MostrarRespuestas(pregunta);
         MostrarPanelRespuesta(pregunta.questionType);
         MostrarInformacionPregunta(pregunta);
         answerSystem.ReiniciarRespuesta();
@@ -56,6 +57,27 @@ public class QuestionUI : MonoBehaviour
         questionNumberText.text = (gameManager.CurrentQuestionIndex + 1) + " / " + quiz.questions.Count;
 
         questionText.text = pregunta.questionText;
+    }
+
+    private void MostrarRespuestas(QuestionData pregunta)
+    {
+        // Respuestas normales
+        for (int i = 0; i < normalAnswerTexts.Length; i++)
+        {
+            if (i < pregunta.answers.Count)
+            {
+                normalAnswerTexts[i].text = pregunta.answers[i];
+            }
+        }
+
+        // Respuestas múltiples
+        for (int i = 0; i < multipleAnswerTexts.Length; i++)
+        {
+            if (i < pregunta.answers.Count)
+            {
+                multipleAnswerTexts[i].text = pregunta.answers[i];
+            }
+        }
     }
 
     private void MostrarPanelRespuesta(QuestionType tipo)
@@ -97,4 +119,6 @@ public class QuestionUI : MonoBehaviour
         // Mostrar la duración
         durationText.text = pregunta.duration + " SEGUNDOS";
     }
+
+
 }

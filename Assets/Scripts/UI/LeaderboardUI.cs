@@ -14,6 +14,8 @@ public class LeaderboardUI : MonoBehaviour
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private Button nextButton;
     [SerializeField] private TMP_Text nextButtonText;
+    [SerializeField] private LeaderboardManager leaderboardManager;
+    [SerializeField] private bool resultadoGuardado;
 
     public void ActualizarLeaderboard()
     {
@@ -60,6 +62,22 @@ public class LeaderboardUI : MonoBehaviour
         leaderboardPanel.SetActive(true);
 
         ActualizarLeaderboard();
+
+        if (!resultadoGuardado)
+        {
+            QuizResult resultado = new QuizResult();
+
+            resultado.nickname = GameSession.PlayerName;
+            resultado.score = scoreSystem.TotalScore;
+            resultado.time = gameManager.TotalTime;
+
+            leaderboardManager.GuardarResultado(
+                GameSession.SelectedQuiz.title,
+                resultado
+            );
+
+            resultadoGuardado = true;
+        }
 
         titleText.text = "CLASIFICACIÓN FINAL";
         nextButtonText.text = "SALIR";
