@@ -26,29 +26,43 @@ public class LeaderboardManager : MonoBehaviour
 
         LeaderboardData leaderboard = new LeaderboardData();
 
-        // Si ya existe un XML, recuperamos sus resultados.
-        if (File.Exists(ruta))
+        try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(LeaderboardData));
-
-            using (FileStream archivo = new FileStream(ruta, FileMode.Open))
+            // Si ya existe un XML, recuperamos sus resultados.
+            if (File.Exists(ruta))
             {
-                leaderboard = (LeaderboardData)serializer.Deserialize(archivo);
+                XmlSerializer serializer = new XmlSerializer(typeof(LeaderboardData));
+
+                using (FileStream archivo = new FileStream(ruta, FileMode.Open))
+                {
+                    leaderboard = (LeaderboardData)serializer.Deserialize(archivo);
+                }
             }
+
+            // Añadimos el nuevo resultado.
+            leaderboard.results.Add(resultado);
+
+            // Guardamos todos los resultados en el XML.
+            XmlSerializer guardarSerializer = new XmlSerializer(typeof(LeaderboardData));
+
+            using (FileStream archivo = new FileStream(ruta, FileMode.Create))
+            {
+                guardarSerializer.Serialize(archivo, leaderboard);
+            }
+
+            Debug.Log("Resultado guardado en: " + ruta);
         }
 
-        // Añadimos el nuevo resultado.
-        leaderboard.results.Add(resultado);
-
-        // Guardamos todos los resultados en el XML.
-        XmlSerializer guardarSerializer = new XmlSerializer(typeof(LeaderboardData));
-
-        using (FileStream archivo = new FileStream(ruta, FileMode.Create))
+        catch (System.Exception excepcion)
         {
-            guardarSerializer.Serialize(archivo, leaderboard);
-        }
+            string mensajeError = "Error al guardar el resultado del Kahoot: " + nombreKahoot
+                + "\nFecha: " + System.DateTime.Now
+                + "\nDetalles: " + excepcion.ToString();
 
-        Debug.Log("Resultado guardado en: " + ruta);
+            Debug.LogError(mensajeError);
+
+            GenerarInformeError(nombreKahoot, mensajeError);
+        }
     }
 
     public LeaderboardData CargarLeaderboard(string nombreKahoot)
@@ -61,11 +75,30 @@ public class LeaderboardManager : MonoBehaviour
             return new LeaderboardData();
         }
 
-        XmlSerializer serializer = new XmlSerializer(typeof(LeaderboardData));
-
-        using (FileStream archivo = new FileStream(ruta, FileMode.Open))
+        try
         {
-            return (LeaderboardData)serializer.Deserialize(archivo);
+            XmlSerializer serializer = new XmlSerializer(typeof(LeaderboardData));
+
+            using (FileStream archivo = new FileStream(ruta, FileMode.Open))
+            {
+                LeaderboardData leaderboard =
+                    (LeaderboardData)serializer.Deserialize(archivo);
+
+                return leaderboard ?? new LeaderboardData();
+            }
+        }
+
+        catch (System.Exception excepcion)
+        {
+            string mensajeError = "Error al cargar el XML del Kahoot: " + nombreKahoot
+                + "\nFecha: " + System.DateTime.Now
+                + "\nDetalles: " + excepcion.ToString();
+
+            Debug.LogError(mensajeError);
+
+            GenerarInformeError(nombreKahoot, mensajeError);
+
+            return new LeaderboardData();
         }
     }
 
@@ -74,5 +107,50 @@ public class LeaderboardManager : MonoBehaviour
         string[] archivos = Directory.GetFiles(leaderboardFolder, "*.xml");
 
         return archivos;
+    }
+
+    private void GenerarInformeError(string nombreKahoot, string mensajeError)
+    {
+        string carpetaInformes = Path.Combine(
+            Application.persistentDataPath,
+            "Reports"
+        );
+
+        if (!Directory.Exists(carpetaInformes))
+        {
+            Directory.CreateDirectory(carpetaInformes);
+        }
+
+        string fecha = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+
+        string nombreArchivo = "Error_" + nombreKahoot + "_" + fecha + ".txt";
+        string ruta = Path.Combine(carpetaInformes, nombreArchivo);
+
+        File.WriteAllText(ruta, mensajeError);
+
+        Debug.Log("Informe de error generado: " + ruta);
+    }
+
+    public void GenerarErrorPrueba()
+    {
+        GenerarInformeError(
+            "Prueba",
+            "Este es un informe de prueba generado desde la aplicación."
+        );
+    }
+
+    public string[] ObtenerInformes()
+    {
+        string carpetaInformes = Path.Combine(
+            Application.persistentDataPath,
+            "Reports"
+        );
+
+        if (!Directory.Exists(carpetaInformes))
+        {
+            return new string[0];
+        }
+
+        return Directory.GetFiles(carpetaInformes, "*.txt");
     }
 }

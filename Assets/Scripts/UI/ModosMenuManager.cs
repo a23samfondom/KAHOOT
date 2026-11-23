@@ -7,4 +7,14 @@ public class ModosMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("SelectorMenu");
     }
+
+    public void ModoLeaderboards()
+    {
+        SceneManager.LoadScene("LeaderboardMenu");
+    }
+
+    public void ModoInformes()
+    {
+        SceneManager.LoadScene("InformesMenu");
+    }
 }

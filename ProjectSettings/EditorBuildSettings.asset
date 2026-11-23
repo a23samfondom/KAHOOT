@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Modos/LeaderboardMenu.unity
     guid: 966f44d475b67764a997b8b2697ba55e
+  - enabled: 1
+    path: Assets/Scenes/Modos/InformesMenu.unity
+    guid: cc977a717b13d5348a5498b9d55da0c4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

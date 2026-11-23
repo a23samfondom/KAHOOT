@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LeaderboardsUI : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class LeaderboardsUI : MonoBehaviour
         {
             string nombreArchivo = System.IO.Path.GetFileNameWithoutExtension(ruta);
 
+            string titulo = nombreArchivo.Replace("Culturageneral", "Cultura General")
+                                         .Replace("Videojuegosclásicos", "Videojuegos Clásicos");
+
             GameObject nuevoItem = Instantiate(quizItemPrefab, quizListContent);
 
             QuizLeaderboardItemUI itemUI = nuevoItem.GetComponent<QuizLeaderboardItemUI>();
@@ -47,14 +51,19 @@ public class LeaderboardsUI : MonoBehaviour
             }
 
             itemUI.Configurar(
-                nombreArchivo,
-                () => AbrirLeaderboard(nombreArchivo)
+                titulo,
+                () => AbrirLeaderboard(titulo)
             );
         }
     }
 
     private void AbrirLeaderboard(string nombreKahoot)
     {
+        foreach (Transform hijo in leaderboardContent)
+        {
+            Destroy(hijo.gameObject);
+        }
+
         quizListPanel.SetActive(false);
         leaderboardPanel.SetActive(true);
 
@@ -62,7 +71,17 @@ public class LeaderboardsUI : MonoBehaviour
 
         LeaderboardData leaderboard = leaderboardManager.CargarLeaderboard(nombreKahoot);
 
-        leaderboard.results.Sort((a, b) => b.score.CompareTo(a.score));
+        leaderboard.results.Sort((a, b) =>
+        {
+            int comparacionPuntos = b.score.CompareTo(a.score);
+
+            if (comparacionPuntos == 0)
+            {
+                return a.time.CompareTo(b.time);
+            }
+
+            return comparacionPuntos;
+        });
 
         for (int i = 0; i < leaderboard.results.Count; i++)
         {
@@ -91,6 +110,11 @@ public class LeaderboardsUI : MonoBehaviour
     {
         leaderboardPanel.SetActive(false);
         quizListPanel.SetActive(true);
+    }
+
+    public void VolverAlMenu()
+    {
+        SceneManager.LoadScene("ModosMenu");
     }
 
 }
