@@ -8,7 +8,6 @@ public class QuestionUI : MonoBehaviour
     [SerializeField] private AnswerSystem answerSystem;
 
     [Header("Información del Kahoot")]
-    //[SerializeField] private TMP_Text quizTitleText;
     [SerializeField] private TMP_Text questionNumberText;
     [SerializeField] private TMP_Text questionText;
 
@@ -52,7 +51,6 @@ public class QuestionUI : MonoBehaviour
         answerSystem.ReiniciarRespuesta();
         questionTimer.StartTimer(pregunta.duration);
 
-        //quizTitleText.text = quiz.title;
 
         questionNumberText.text = (gameManager.CurrentQuestionIndex + 1) + " / " + quiz.questions.Count;
 

@@ -5,6 +5,5 @@ using System.Collections.Generic;
 public class QuizData
 {
     public string title;
-
     public List<QuestionData> questions;
 }
