@@ -7096,8 +7096,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\xBFCu\xE1l es la capital de Espa\xF1a?"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 77fb6db0dde6f0442a1fd8a73f5e607c, type: 2}
-  m_sharedMaterial: {fileID: -1394793298756773733, guid: 77fb6db0dde6f0442a1fd8a73f5e607c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7c55cee399a2ca54db0b49899c19728b, type: 2}
+  m_sharedMaterial: {fileID: -1728209132608125663, guid: 7c55cee399a2ca54db0b49899c19728b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7121,7 +7121,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65.8
+  m_fontSize: 60.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -85,6 +85,6 @@ public class ReportsUI : MonoBehaviour
 
     public void VolverAlMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("ModosMenu");
     }
 }

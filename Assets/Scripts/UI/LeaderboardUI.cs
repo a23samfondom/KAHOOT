@@ -88,6 +88,6 @@ public class LeaderboardUI : MonoBehaviour
 
     public void VolverAlMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("ModosMenu");
     }
 }

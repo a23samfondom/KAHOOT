@@ -40,6 +40,6 @@ public class NicknamePanelUI : MonoBehaviour
 
     public void VolverAlMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("ModosMenu");
     }
 }

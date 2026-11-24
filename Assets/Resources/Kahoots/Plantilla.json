@@ -1,0 +1,85 @@
+{
+  "title": "Plantilla",
+  "questions": [
+    {
+      "questionText": "¿Cuál es el planeta más grande del sistema solar?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "Marte", "Júpiter", "Saturno", "Venus" ],
+      "correctAnswers": [ 1 ]
+    },
+    {
+      "questionText": "¿En qué año llegó el ser humano a la Luna?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "1965", "1975", "1969", "1980" ],
+      "correctAnswers": [ 2 ]
+    },
+    {
+      "questionText": "¿Cuál es la capital de Francia?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "Roma", "París", "Madrid", "Londres" ],
+      "correctAnswers": [ 1 ]
+    },
+    {
+      "questionText": "¿Cuántos lados tiene un hexágono?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "5", "6", "7", "8" ],
+      "correctAnswers": [ 1 ]
+    },
+    {
+      "questionText": "¿Quién pintó la Mona Lisa?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "Van Gogh", "Picasso", "Leonardo da Vinci", "Dalí" ],
+      "correctAnswers": [ 2 ]
+    },
+    {
+      "questionText": "¿Cuál es el océano más grande del mundo?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "Atlántico", "Índico", "Ártico", "Pacífico" ],
+      "correctAnswers": [ 3 ]
+    },
+    {
+      "questionText": "¿Qué lenguaje se utiliza principalmente para programar en Unity?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "Python", "C#", "Java", "C++" ],
+      "correctAnswers": [ 1 ]
+    },
+    {
+      "questionText": "¿Cuántos jugadores tiene un equipo de fútbol en el campo?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "9", "10", "11", "12" ],
+      "correctAnswers": [ 2 ]
+    },
+    {
+      "questionText": "¿Cuánto es 8 multiplicado por 7?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "54", "56", "64", "48" ],
+      "correctAnswers": [ 1 ]
+    },
+    {
+      "questionText": "¿Qué animal es conocido como el rey de la selva?",
+      "questionType": 2,
+      "duration": 20,
+      "scoreMultiplier": 0,
+      "answers": [ "Tigre", "León", "Elefante", "Leopardo" ],
+      "correctAnswers": [ 1 ]
+    }
+  ]
+}

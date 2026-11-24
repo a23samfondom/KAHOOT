@@ -109,7 +109,7 @@ public class LeaderboardManager : MonoBehaviour
         return archivos;
     }
 
-    private void GenerarInformeError(string nombreKahoot, string mensajeError)
+    public void GenerarInformeError(string nombreKahoot, string mensajeError)
     {
         string carpetaInformes = Path.Combine(
             Application.persistentDataPath,
