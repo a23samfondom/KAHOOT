@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Gestiona las clasificaciones independientes de cada Kahoot.
 public class LeaderboardsUI : MonoBehaviour
 {
     [Header("Referencias")]
@@ -20,6 +21,7 @@ public class LeaderboardsUI : MonoBehaviour
     [SerializeField] private GameObject playerItemPrefab;
     [SerializeField] private TMP_Text leaderboardTitleText;
 
+    // Mostrar la lista de Kahoots al entrar en la escena.
     private void Start()
     {
         quizListPanel.SetActive(true);
@@ -28,6 +30,7 @@ public class LeaderboardsUI : MonoBehaviour
         CrearListaKahoots();
     }
 
+    // Crear un elemento por cada Kahoot con resultados guardados.
     private void CrearListaKahoots()
     {
         string[] archivos = leaderboardManager.ObtenerKahootsConResultados();
@@ -36,6 +39,7 @@ public class LeaderboardsUI : MonoBehaviour
         {
             string nombreArchivo = System.IO.Path.GetFileNameWithoutExtension(ruta);
 
+            // Adaptar los nombres de archivo a los títulos visibles.
             string titulo = nombreArchivo.Replace("Culturageneral", "Cultura General")
                                          .Replace("Videojuegosclásicos", "Videojuegos Clásicos");
 
@@ -50,6 +54,7 @@ public class LeaderboardsUI : MonoBehaviour
                 continue;
             }
 
+            // Abrir la clasificación al pulsar el elemento.
             itemUI.Configurar(
                 titulo,
                 () => AbrirLeaderboard(titulo)
@@ -57,8 +62,10 @@ public class LeaderboardsUI : MonoBehaviour
         }
     }
 
+    // Cargar y mostrar los resultados del Kahoot seleccionado.
     private void AbrirLeaderboard(string nombreKahoot)
     {
+        // Eliminar los elementos de clasificaciones anteriores.
         foreach (Transform hijo in leaderboardContent)
         {
             Destroy(hijo.gameObject);
@@ -71,6 +78,7 @@ public class LeaderboardsUI : MonoBehaviour
 
         LeaderboardData leaderboard = leaderboardManager.CargarLeaderboard(nombreKahoot);
 
+        // Ordenar primero por puntuación y después por tiempo.
         leaderboard.results.Sort((a, b) =>
         {
             int comparacionPuntos = b.score.CompareTo(a.score);
@@ -83,6 +91,7 @@ public class LeaderboardsUI : MonoBehaviour
             return comparacionPuntos;
         });
 
+        // Crear un elemento visual para cada jugador.
         for (int i = 0; i < leaderboard.results.Count; i++)
         {
             QuizResult resultado = leaderboard.results[i];
@@ -106,12 +115,14 @@ public class LeaderboardsUI : MonoBehaviour
         }
     }
 
+    // Volver a la lista de cuestionarios.
     public void VolverAListaKahoots()
     {
         leaderboardPanel.SetActive(false);
         quizListPanel.SetActive(true);
     }
 
+    // Volver al menú de modos.
     public void VolverAlMenu()
     {
         SceneManager.LoadScene("ModosMenu");

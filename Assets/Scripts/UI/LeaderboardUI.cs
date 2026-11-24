@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Gestiona la clasificación durante y al finalizar una partida.
 public class LeaderboardUI : MonoBehaviour
 {
     [Header("Referencias")]
@@ -17,18 +18,19 @@ public class LeaderboardUI : MonoBehaviour
     [SerializeField] private LeaderboardManager leaderboardManager;
     [SerializeField] private bool resultadoGuardado;
 
+    // Actualiza la clasificación con los datos del jugador.
     public void ActualizarLeaderboard()
     {
-        // Limpiamos los elementos anteriores
+        // Limpiamos los elementos anteriores.
         foreach (Transform hijo in content)
         {
             Destroy(hijo.gameObject);
         }
 
-        // Creamos el elemento del jugador
+        // Creamos el elemento del jugador.
         GameObject nuevoItem = Instantiate(leaderboardItemPrefab, content);
 
-        // Obtenemos su componente
+        // Obtenemos su componente.
         LeaderboardItemUI itemUI = nuevoItem.GetComponent<LeaderboardItemUI>();
 
         if (itemUI == null)
@@ -37,7 +39,7 @@ public class LeaderboardUI : MonoBehaviour
             return;
         }
 
-        // Configuramos los datos del jugador
+        // Configuramos los datos del jugador.
         itemUI.Configurar(
             1,
             GameSession.PlayerName,
@@ -45,6 +47,7 @@ public class LeaderboardUI : MonoBehaviour
         );
     }
 
+    // Avanza a la siguiente pregunta o muestra el resultado final.
     public void SiguientePregunta()
     {
         if (gameManager.CurrentQuestionIndex >= GameSession.SelectedQuiz.questions.Count - 1)
@@ -57,12 +60,14 @@ public class LeaderboardUI : MonoBehaviour
         gameManager.SiguientePregunta();
     }
 
+    // Muestra y guarda la clasificación final de la partida.
     public void MostrarClasificacionFinal()
     {
         leaderboardPanel.SetActive(true);
 
         ActualizarLeaderboard();
 
+        // Evitar guardar el mismo resultado más de una vez.
         if (!resultadoGuardado)
         {
             QuizResult resultado = new QuizResult();
@@ -79,6 +84,7 @@ public class LeaderboardUI : MonoBehaviour
             resultadoGuardado = true;
         }
 
+        // Cambiar el título y el botón para finalizar la partida.
         titleText.text = "CLASIFICACIÓN FINAL";
         nextButtonText.text = "SALIR";
 
@@ -86,6 +92,7 @@ public class LeaderboardUI : MonoBehaviour
         nextButton.onClick.AddListener(VolverAlMenu);
     }
 
+    // Regresar al menú de modos.
     public void VolverAlMenu()
     {
         SceneManager.LoadScene("ModosMenu");

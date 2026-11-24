@@ -1,12 +1,13 @@
-
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 
+// Carga los cuestionarios predeterminados y externos.
 public class QuizLoader : MonoBehaviour
 {
     private List<QuizData> quizzes = new List<QuizData>();
 
+    // Permite consultar los cuestionarios cargados.
     public IReadOnlyList<QuizData> Quizzes { get { return quizzes; } }
 
     private void Awake()
@@ -14,6 +15,7 @@ public class QuizLoader : MonoBehaviour
         CargarKahoots();
     }
 
+    // Carga los cuestionarios incluidos en Resources.
     private void CargarKahoots()
     {
         // Buscar todos los archivos JSON de la carpeta Kahoots.
@@ -22,6 +24,7 @@ public class QuizLoader : MonoBehaviour
         // Recorrer todos los Kahoots predeterminados.
         foreach (TextAsset archivo in archivos)
         {
+            // Evitar que la plantilla aparezca en el selector.
             if (archivo.name == "Plantilla")
             {
                 continue;
@@ -29,8 +32,10 @@ public class QuizLoader : MonoBehaviour
 
             try
             {
+                // Convertir el JSON en un objeto QuizData.
                 QuizData quiz = JsonUtility.FromJson<QuizData>(archivo.text);
 
+                // Comprobar que el cuestionario contiene datos válidos.
                 if (quiz == null || string.IsNullOrWhiteSpace(quiz.title)
                     || quiz.questions == null || quiz.questions.Count == 0)
                 {
@@ -43,6 +48,7 @@ public class QuizLoader : MonoBehaviour
             }
             catch (System.Exception excepcion)
             {
+                // Generar un informe si falla la carga.
                 string nombreKahoot = archivo.name;
 
                 string mensajeError =
@@ -56,11 +62,13 @@ public class QuizLoader : MonoBehaviour
             }
         }
 
+        // Cargar también los cuestionarios creados por el usuario.
         CargarKahootsExternos();
 
         Debug.Log("Total de Kahoots cargados: " + quizzes.Count);
     }
 
+    // Busca y carga los cuestionarios guardados en persistentDataPath.
     private void CargarKahootsExternos()
     {
         string carpeta = Path.Combine(
@@ -68,6 +76,7 @@ public class QuizLoader : MonoBehaviour
             "Kahoots"
         );
 
+        // Comprobar si existe la carpeta.
         if (!Directory.Exists(carpeta))
         {
             return;
@@ -82,10 +91,13 @@ public class QuizLoader : MonoBehaviour
 
             try
             {
+                // Leer el contenido del archivo.
                 string json = File.ReadAllText(ruta);
 
+                // Convertir el JSON en un objeto QuizData.
                 QuizData quiz = JsonUtility.FromJson<QuizData>(json);
 
+                // Comprobar que el cuestionario contiene datos válidos.
                 if (quiz == null || string.IsNullOrWhiteSpace(quiz.title)
                     || quiz.questions == null || quiz.questions.Count == 0)
                 {
@@ -98,6 +110,7 @@ public class QuizLoader : MonoBehaviour
             }
             catch (System.Exception excepcion)
             {
+                // Generar un informe si falla la carga.
                 string mensajeError =
                     "Error al cargar el Kahoot externo: " + nombreKahoot
                     + "\nFecha: " + System.DateTime.Now
@@ -110,6 +123,7 @@ public class QuizLoader : MonoBehaviour
         }
     }
 
+    // Guarda un informe de texto cuando se produce un error.
     private void GenerarInformeError(string nombreKahoot, string mensajeError)
     {
         string carpetaInformes = Path.Combine(
@@ -117,11 +131,13 @@ public class QuizLoader : MonoBehaviour
             "Reports"
         );
 
+        // Crear la carpeta de informes si no existe.
         if (!Directory.Exists(carpetaInformes))
         {
             Directory.CreateDirectory(carpetaInformes);
         }
 
+        // Añadir la fecha al nombre para identificar cada informe.
         string fecha = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 
         string nombreArchivo = "Error_" + nombreKahoot + "_" + fecha + ".txt";

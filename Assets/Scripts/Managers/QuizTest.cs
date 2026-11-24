@@ -1,4 +1,6 @@
 using UnityEngine;
+
+// Comprueba la lectura de un archivo JSON.
 public class QuizTest : MonoBehaviour
 {
     private void Start()
@@ -16,11 +18,11 @@ public class QuizTest : MonoBehaviour
         // Convertir el JSON en un objeto QuizData.
         QuizData quiz = JsonUtility.FromJson<QuizData>(jsonFile.text);
 
-        // Mostrar los datos en la consola.
+        // Mostrar los datos generales en la consola.
         Debug.Log("Kahoot: " + quiz.title);
         Debug.Log("Número de preguntas: " + quiz.questions.Count);
 
-        // Mostrar cada pregunta.
+        // Mostrar los datos de cada pregunta.
         foreach (QuestionData question in quiz.questions)
         {
             Debug.Log("Pregunta: " + question.questionText);

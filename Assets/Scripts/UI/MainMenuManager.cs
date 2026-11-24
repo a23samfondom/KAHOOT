@@ -23,12 +23,6 @@ public class MainMenuManager : MonoBehaviour
     }
 
 
-    /* OPCIONES */
-    public void Options()
-    {
-        SceneManager.LoadScene("OptionMenu");
-    }
-
 
     /* CRÉDITOS */
     public void Creditos()

@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+// Muestra los resultados de cada respuesta y gestiona su animación.
 public class FeedbackUI : MonoBehaviour
 {
     [Header("Referencias")]
@@ -22,6 +23,7 @@ public class FeedbackUI : MonoBehaviour
     private float fadeTimer;
     private bool isFading;
 
+    // Controla la aparición gradual del panel.
     private void Update()
     {
         if (!isFading) return;
@@ -39,6 +41,7 @@ public class FeedbackUI : MonoBehaviour
         }
     }
 
+    // Activa el panel y comienza su animación.
     public void MostrarFeedback()
     {
         gameObject.SetActive(true);
@@ -51,6 +54,7 @@ public class FeedbackUI : MonoBehaviour
         isFading = true;
     }
 
+    // Muestra el resultado según el tipo de respuesta.
     public void MostrarFeedback(FeedbackType tipo, int puntuacion)
     {
         switch (tipo)
@@ -76,6 +80,7 @@ public class FeedbackUI : MonoBehaviour
         MostrarFeedback();
     }
 
+    // Cierra el feedback y muestra la clasificación.
     public void Continuar()
     {
 
@@ -87,6 +92,7 @@ public class FeedbackUI : MonoBehaviour
 
     }
 
+    // Muestra el texto de la respuesta correcta.
     public void MostrarRespuestaCorrecta(string respuesta)
     {
         correctAnswerText.text = "Respuesta correcta: " + respuesta;

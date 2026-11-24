@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+// Gestiona las respuestas del jugador y comprueba si son correctas.
 public class AnswerSystem : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
@@ -22,10 +24,9 @@ public class AnswerSystem : MonoBehaviour
     [SerializeField] private TMP_Text minimumValueText;
     [SerializeField] private TMP_Text maximumValueText;
 
-
-
     private bool respuestaEnviada;
 
+    // Comprueba una respuesta de tipo Normal o TrueFalse.
     public void ComprobarRespuesta(int indiceRespuesta)
     {
         if (respuestaEnviada) return;
@@ -34,6 +35,7 @@ public class AnswerSystem : MonoBehaviour
 
         questionTimer.StopTimer();
 
+        // Desactivar los botones después de responder.
         foreach (Button boton in botonesRespuesta)
         {
             boton.interactable = false;
@@ -43,6 +45,7 @@ public class AnswerSystem : MonoBehaviour
 
         QuestionData pregunta = gameManager.CurrentQuestion;
 
+        // Mostrar cuál era la respuesta correcta.
         if (pregunta.correctAnswers != null && pregunta.correctAnswers.Count > 0)
         {
             int indiceCorrecto = pregunta.correctAnswers[0];
@@ -54,12 +57,13 @@ public class AnswerSystem : MonoBehaviour
             }
         }
 
+        // Comprobar si el índice seleccionado es correcto.
         bool esCorrecta = pregunta.correctAnswers.Contains(indiceRespuesta);
 
 
         if (esCorrecta)
         {
-
+            // Calcular los puntos según el tiempo restante.
             puntuacionObtenida = scoreSystem.CalcularPuntuacion(
                 questionTimer.TimeRemaining,
                 pregunta.duration,
@@ -78,6 +82,7 @@ public class AnswerSystem : MonoBehaviour
         }
     }
 
+    // Reactivar los controles al mostrar una nueva pregunta.
     public void ReiniciarRespuesta()
     {
         respuestaEnviada = false;
@@ -93,6 +98,7 @@ public class AnswerSystem : MonoBehaviour
             toggle.interactable = true;
         }
 
+        // Configurar el Slider según los valores de la pregunta.
         respuestaSlider.interactable = true;
 
         QuestionData pregunta = gameManager.CurrentQuestion;
@@ -107,6 +113,7 @@ public class AnswerSystem : MonoBehaviour
         ActualizarValorSlider(respuestaSlider.value);
     }
 
+    // Gestiona el caso en el que se termina el tiempo.
     public void TiempoAgotado()
     {
         if (respuestaEnviada)
@@ -116,6 +123,7 @@ public class AnswerSystem : MonoBehaviour
 
         QuestionData pregunta = gameManager.CurrentQuestion;
 
+        // Mostrar la respuesta correcta aunque no se haya respondido.
         if (pregunta.correctAnswers != null &&
             pregunta.correctAnswers.Count > 0 &&
             pregunta.answers != null)
@@ -129,7 +137,7 @@ public class AnswerSystem : MonoBehaviour
             }
         }
 
-
+        // Desactivar los botones cuando se acaba el tiempo.
         foreach (Button boton in botonesRespuesta)
         {
             boton.interactable = false;
@@ -142,16 +150,19 @@ public class AnswerSystem : MonoBehaviour
         feedbackUI.MostrarFeedback(FeedbackType.Timeout, puntuacionObtenida);
     }
 
+    // Suscribirse al evento cuando se activa el objeto.
     private void OnEnable()
     {
         questionTimer.OnTimerFinished += TiempoAgotado;
     }
 
+    // Dejar de escuchar el evento cuando se desactiva el objeto.
     private void OnDisable()
     {
         questionTimer.OnTimerFinished -= TiempoAgotado;
     }
 
+    // Comprueba las respuestas de tipo MultipleCorrect.
     public void ComprobarRespuestasMultiples()
     {
         if (respuestaEnviada)
@@ -163,7 +174,7 @@ public class AnswerSystem : MonoBehaviour
 
         List<int> respuestasSeleccionadas = new List<int>();
 
-        // Recogemos los Toggle seleccionados
+        // Recogemos los Toggle seleccionados.
         for (int i = 0; i < togglesRespuesta.Length; i++)
         {
             if (togglesRespuesta[i].isOn)
@@ -176,7 +187,7 @@ public class AnswerSystem : MonoBehaviour
 
         QuestionData pregunta = gameManager.CurrentQuestion;
 
-        // Comprobamos que coincidan todas las respuestas
+        // Comprobamos que coincidan todas las respuestas.
         bool esCorrecta = respuestasSeleccionadas.Count == pregunta.correctAnswers.Count;
 
         foreach (int respuesta in pregunta.correctAnswers)
@@ -188,7 +199,7 @@ public class AnswerSystem : MonoBehaviour
             }
         }
 
-        // Obtenemos los textos de las respuestas correctas
+        // Obtenemos los textos de las respuestas correctas.
         List<string> textosCorrectos = new List<string>();
 
         foreach (int indice in pregunta.correctAnswers)
@@ -218,11 +229,13 @@ public class AnswerSystem : MonoBehaviour
         }
     }
 
+    // Actualiza el número que muestra el Slider.
     public void ActualizarValorSlider(float valor)
     {
         valueAnswerText.text = Mathf.RoundToInt(valor).ToString();
     }
 
+    // Comprueba la respuesta seleccionada mediante el Slider.
     public void ComprobarRespuestaSlider()
     {
         if (respuestaEnviada)
@@ -238,6 +251,7 @@ public class AnswerSystem : MonoBehaviour
 
         float valorSeleccionado = respuestaSlider.value;
 
+        // Comparar el valor seleccionado con el valor correcto.
         bool esCorrecta = Mathf.Approximately(
             valorSeleccionado,
             pregunta.correctValue
